@@ -89,8 +89,10 @@ The app uses mock API functions for demonstration. In a real-world scenario, rep
 
 ## Bonus Features Implemented
 
-- Dashboard with charts
-- Input validation (Yup/Formik ready)
+- Dashboard with charts (pie/bar for leads by status and total value)
+- Dark/Light mode toggle
+- Input validation with Yup/Formik on add/edit forms
+- Unit tests for Home screen with Jest
 - Clean, mobile-friendly UI with React Native Paper
 
 ## Testing
