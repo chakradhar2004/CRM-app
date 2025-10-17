@@ -2,6 +2,9 @@
 
 A React Native mobile application for managing customers and their leads, built with Expo.
 
+## App Link
+Download the APK: https://expo.dev/accounts/chakri02/projects/CRM/builds/717121b2-044e-41a6-a8f5-5031c01eabb7
+
 ## Features
 
 ### Authentication
