@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { TextInput, Button, Card, Text, SegmentedButtons } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLead, updateLead } from '../store/slices/leadSlice';
+import { addLead, updateLead, fetchLeads } from '../store/slices/leadSlice';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -29,11 +29,16 @@ export default function AddEditLead({ route, navigation }) {
   const handleSave = (values) => {
     const leadData = { customerId, title: values.title, description: values.description, status: values.status, value: parseFloat(values.value) };
     if (lead) {
-      dispatch(updateLead({ id: lead.id, lead: leadData }));
+      dispatch(updateLead({ id: lead.id, lead: leadData })).then(() => {
+        dispatch(fetchLeads({ customerId }));
+        navigation.goBack();
+      });
     } else {
-      dispatch(addLead(leadData));
+      dispatch(addLead(leadData)).then(() => {
+        dispatch(fetchLeads({ customerId }));
+        navigation.goBack();
+      });
     }
-    navigation.goBack();
   };
 
   return (

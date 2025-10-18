@@ -3,21 +3,16 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Card, Text, Button, List } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCustomers } from '../store/slices/customerSlice';
+import { fetchLeads } from '../store/slices/leadSlice';
 
 export default function CustomerDetails({ route, navigation }) {
   const { customer } = route.params;
   const dispatch = useDispatch();
-  const customers = useSelector(state => state.customers.customers);
-
-  // Mock leads for the customer
-  const leads = [
-    { id: 1, title: 'Lead 1', description: 'Description 1', status: 'New', value: 1000, createdAt: '2023-01-01' },
-    { id: 2, title: 'Lead 2', description: 'Description 2', status: 'Contacted', value: 2000, createdAt: '2023-01-02' },
-  ];
+  const { leads } = useSelector(state => state.leads);
 
   useEffect(() => {
-    // Refresh customers if needed
-  }, [dispatch]);
+    dispatch(fetchLeads({ customerId: customer.id }));
+  }, [dispatch, customer.id]);
 
   return (
     <ScrollView style={styles.container}>
@@ -43,7 +38,7 @@ export default function CustomerDetails({ route, navigation }) {
           ))}
           <Button
             mode="contained"
-            onPress={() => navigation.navigate('AddEditLead', { customer })}
+            onPress={() => navigation.navigate('AddEditLead', { customerId: customer.id })}
             style={styles.button}
           >
             Add Lead

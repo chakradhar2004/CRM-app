@@ -16,10 +16,9 @@ export default function LeadList({ route, navigation }) {
     dispatch(fetchLeads({ customerId, statusFilter: selectedStatus === 'All' ? '' : selectedStatus }));
   }, [dispatch, customerId, selectedStatus]);
 
-  const handleFilterChange = (index) => {
-    const status = statuses[index];
-    setSelectedStatus(status);
-    dispatch(setStatusFilter(status === 'All' ? '' : status));
+  const handleFilterChange = (value) => {
+    setSelectedStatus(value);
+    dispatch(setStatusFilter(value === 'All' ? '' : value));
   };
 
   const handleDelete = (id) => {
